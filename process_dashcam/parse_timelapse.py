@@ -138,8 +138,8 @@ def process_all_timelapses(timelapse_dir: Path, output_dir: Path, fps: int = 10)
 def main():
     """Main function to process timelapse images."""
     # Define paths
-    timelapse_dir = Path("Timelapse")
-    output_dir = Path("Timelapse_Videos")
+    timelapse_dir = Path("/Users/anuragbhatt/Movies/Dashcam/Timelapse")
+    output_dir = Path("/Users/anuragbhatt/Movies/Dashcam/Timelapse_Videos")
     
     if not timelapse_dir.exists():
         print(f"Timelapse directory not found: {timelapse_dir}")

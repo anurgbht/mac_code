@@ -122,8 +122,8 @@ def process_all_days(recordings_dir: Path, output_dir: Path) -> None:
 def main():
     """Main function to process dashcam recordings."""
     # Define paths
-    recordings_dir = Path("Recordings")
-    output_dir = Path("Concatenated")
+    recordings_dir = Path("/Users/anuragbhatt/Movies/Dashcam/Recordings")
+    output_dir = Path("/Users/anuragbhatt/Movies/Dashcam/Concatenated")
     
     if not recordings_dir.exists():
         print(f"Recordings directory not found: {recordings_dir}")
