@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Mahabharat Relation Graph</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style>
+    /* HTML styles */
+    html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      font-family: sans-serif;
+      font-size: 75%;
+    }
+
+    /* SVG styles */
+    svg {
+      flex-basis: 100%;
+      min-width: 200px;
+      height: "100%";
+      width: "100%";
+    }
+
+    .links line {
+      stroke: #aaa;
+      stroke-opacity: 0.6;
+      marker-end: url(#arrowhead);
+    }
+
+    .nodes circle {
+      pointer-events: all;
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
+
+    /* Apply styles to node text */
+    .node-label {
+      font-size: 12px;
+      pointer-events: none;
+      /* Prevent text from blocking interactions */
+      text-anchor: top;
+      fill: black;
+    }
+
+    .legend-container {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 2px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      /* Adjusted from left to right */
+      height: 15%;
+      overflow-y: auto;
+    }
+
+    .legend-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .legend-item {
+      /* Optional styling for each legend item */
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 10px;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h1>Mahabharat Relation Graph</h1>
+    <br>
+    <label for="filter-input">Filter by Character name:</label>
+    <br>
+    <input type="text" id="filter-input" value="Arjuna">
+    <br>
+    <label for="maxLevels">Max Levels:</label>
+    <br>
+    <input type="number" id="maxLevels" value="2">
+    <br>
+    <button id="filter-button">Filter</button>
+  </div>
+
+  <div class="legend-container">
+    <ul class="legend-list">
+      <li class="legend-item">
+        <div class="legend-color" style="background-color: #1f77b4;"></div>
+        <span>Male</span>
+      </li>
+      <li class="legend-item">
+        <div class="legend-color" style="background-color: #ff7f0e ;"></div>
+        <span>Female</span>
+      </li>
+      <li class="legend-item">
+        <div class="legend-color" style="background-color: #800080;"></div>
+        <span>Selected</span>
+      </li>
+    </ul>
+  </div>
+
+
+  <svg>
+    <defs>
+      <marker id="arrowhead" markerWidth="5" markerHeight="3.5" refX="7.5" refY="1.75" orient="auto">
+        <polygon points="0 0, 5 1.75, 0 3.5" />
+      </marker>
+    </defs>
+  </svg>
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="./assets/mahabharat/code.js"></script>
+</body>
+
+</html>
