@@ -1,6 +1,6 @@
 MAP:
   API:
-    apikey: T4u6XLSu5VzIrlagFWJ6mF7vt8feuYpJSFD6DizO7QA
+    apikey: yourkeyhere
     appid: HERE-49599d7f-b21f-49c7-aa39-cd15be69347f
   LOG:
     loglevel: info
