@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Periscope</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <div class="ribbon">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/imgs/logo.jpg" alt="Simulate Solutions Logo">
+            </div>
+            <div class="container">
+                <h1>Welcome to Periscope</h1>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Alex Peck</button>
+                <div class="dropdown-content">
+                    <a href="#">Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="index.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="under_construction.html">Dashboard</a></li>
+            <li><a href="under_construction.html">Profile</a></li>
+            <li><a href="under_construction.html">Settings</a></li>
+            <li><a href="under_construction.html">Activity</a></li>
+            <li><a href="under_construction.html">Reports</a></li>
+            <li><a href="under_construction.html">Analytics</a></li>
+            <li><a href="under_construction.html">Security</a></li>
+            <li><a href="under_construction.html">Notifications</a></li>
+            <li><a href="under_construction.html">Help</a></li>
+        </ul>
+        <br>
+        <br>
+
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="under_construction.html">New Run</a></li>
+            <li><a href="under_construction.html">Previous Run</a></li>
+            <li><a href="under_construction.html">Run MSA</a></li>
+            <li><a href="under_construction.html">Edit Run Settings</a></li>
+            <li><a href="under_construction.html">Launch VR</a></li>
+            <li><a href="under_construction.html">Build Model</a></li>
+            <li><a href="under_construction.html">Model Overview</a></li>
+        </ul>
+    </div>
+
+
+    <section id="dashboard">
+        <!-- First grid item: Number of casualties per run -->
+        <div class="grid-item">
+            <h2>Number of Casualties per Run</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Run</th>
+                            <th>Casualties</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="casualty-data">
+                        <!-- Data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Second grid item: Graph showing traffic on the website -->
+        <div class="grid-item">
+            <div class="camera-image">
+                <img src="assets/imgs/compare-hist.png" alt="Simulate Solutions Logo">
+            </div>
+        </div>
+
+        <!-- Third grid item: Graph showing security camera images -->
+        <div class="grid-item">
+            <div class="camera-image">
+                <img src="assets/imgs/heatmap.png" alt="Simulate Solutions Logo">
+            </div>
+        </div>
+
+        <!-- Fourth grid item: Picture of a security camera -->
+        <div class="grid-item">
+            <div class="camera-image">
+                <img src="assets/imgs/overview.png" alt="Simulate Solutions Logo">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Simulate Solutions. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="privacy_policy.html">Privacy Policy</a></li>
+                    <li><a href="terms_of_service.html">Terms of Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        // Generate random data for casualties per run
+        function generateCasualtyData() {
+            var data = [];
+            for (var i = 1; i <= 20; i++) {
+                var casualties = Math.floor(Math.random() * (45 - 5 + 1)) + 5;
+                var time = new Date();
+                // Randomly offset the time by a few hours
+                var offsetHours = Math.floor(Math.random() * 6); // Adjust the maximum offset as needed
+                time.setHours(time.getHours() - offsetHours);
+                data.push({ run: i, casualties: casualties, time: time.toLocaleString() });
+
+            }
+            return data;
+        }
+
+        // Populate the casualty table with generated data
+        function populateCasualtyTable() {
+            var casualtyData = generateCasualtyData();
+            var tbody = document.getElementById('casualty-data');
+            tbody.innerHTML = '';
+            casualtyData.forEach(function (entry) {
+                var row = '<tr><td><a href="under_construction.html">' + entry.run + '</a></td><td>' + entry.casualties + '</td><td>' + entry.time + '</td></tr>';
+                tbody.innerHTML += row;
+            });
+        }
+
+        // Call the function to populate casualty table
+        populateCasualtyTable();
+    </script>
+
+</body>
+
+</html>
