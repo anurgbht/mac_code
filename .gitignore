@@ -1,26 +1,144 @@
-.py[cod]
+# Python
+*.py[cod]
 __pycache__/
-.mypy_cache/
-.pytest_cache/
-.ruff_cache/
-.pdm-python
-github-recovery-codes.txt
-.DS_Store
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-data/
-*.txt
+# Python Environment
+venv/
+ENV/
+env/
+.venv
+.env
+.pdm-python
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Linting & Formatting
+.ruff_cache/
+.flake8
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Security
+github-recovery-codes.txt
+credentials.json
+creds.json
+.env.local
+.env.*.local
+
+# Node.js & Web Development
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+dist/
+.next/
+.nuxt/
+out/
+.cache/
+.vuepress/dist/
+
+# Build outputs
+build/
+dist/
+*.bundle.js
+*.min.js
+*.min.css
+
+# Logs
 *.log
+logs/
+
+# Data files
+data/
+*.csv
+*.xlsx
+*.xls
+*.db
+*.sqlite
+*.sqlite3
+*.txt
+
+# Media files
 *.png
 *.jpg
 *.jpeg
 *.gif
 *.svg
+*.webp
+*.ico
+
+# Archives
 *.zip
 *.tar.gz
 *.tar.bz2
 *.tar.xz
 *.rar
 *.7z
+
+# Documents
 *.pdf
-*.xlsx
-*.csv
+*.doc
+*.docx
+
+# OS
+.DS_Store
+Thumbs.db
+.AppleDouble/
+.LSOverride/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+.~*
+
+# Downloaded/Cached content
+Downloaded/
+downloads/
+cache/
+.cache/
