@@ -1,0 +1,32 @@
+digraph Tree {
+node [shape=box] ;
+0 [label="X[7] <= 0.051\nfriedman_mse = 0.236\nsamples = 381\nvalue = -0.0"] ;
+1 [label="X[20] <= 16.83\nfriedman_mse = 0.049\nsamples = 233\nvalue = 0.329"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="X[13] <= 48.7\nfriedman_mse = 0.022\nsamples = 219\nvalue = 0.358"] ;
+1 -> 2 ;
+3 [label="friedman_mse = 0.014\nsamples = 216\nvalue = 1.555"] ;
+2 -> 3 ;
+4 [label="friedman_mse = 0.222\nsamples = 3\nvalue = -1.214"] ;
+2 -> 4 ;
+5 [label="X[26] <= 0.221\nfriedman_mse = 0.25\nsamples = 14\nvalue = -0.119"] ;
+1 -> 5 ;
+6 [label="friedman_mse = 0.0\nsamples = 5\nvalue = 1.614"] ;
+5 -> 6 ;
+7 [label="friedman_mse = 0.173\nsamples = 9\nvalue = -1.685"] ;
+5 -> 7 ;
+8 [label="X[22] <= 90.38\nfriedman_mse = 0.091\nsamples = 148\nvalue = -0.518"] ;
+0 -> 8 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+9 [label="X[17] <= 0.012\nfriedman_mse = 0.109\nsamples = 8\nvalue = 0.256"] ;
+8 -> 9 ;
+10 [label="friedman_mse = 0.0\nsamples = 1\nvalue = -2.628"] ;
+9 -> 10 ;
+11 [label="friedman_mse = -0.0\nsamples = 7\nvalue = 1.614"] ;
+9 -> 11 ;
+12 [label="X[26] <= 0.216\nfriedman_mse = 0.054\nsamples = 140\nvalue = -0.562"] ;
+8 -> 12 ;
+13 [label="friedman_mse = 0.16\nsamples = 5\nvalue = 0.766"] ;
+12 -> 13 ;
+14 [label="friedman_mse = 0.029\nsamples = 135\nvalue = -2.502"] ;
+12 -> 14 ;
+}

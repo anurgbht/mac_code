@@ -1,0 +1,18 @@
+MAP:
+   API:
+      apikey: T4u6XLSu5VzIrlagFWJ6mF7vt8feuYpJSFD6DizO7QA
+      appid: HERE-49599d7f-b21f-49c7-aa39-cd15be69347f
+   SQL:
+      host: localhost
+      port: 5432
+      database: s211r3
+      user: postgres
+      password: pFAS
+      schema: rdf_deu
+   do_initial_filtering: True
+   turning_angle_treshold: 15
+   LOG:
+      loglevel: info
+
+LEVEL:
+   Name: Anurag

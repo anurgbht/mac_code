@@ -1,0 +1,2 @@
+k = bin(int(input("???")))
+l = bin(int(input("???")))

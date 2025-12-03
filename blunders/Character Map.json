@@ -1,0 +1,824 @@
+{
+    "nan": {
+        "key": -99,
+        "s": "M"
+    },
+    "Abhimanyu": {
+        "key": 1,
+        "s": "M",
+        "m": "Subhadra",
+        "f": "Arjun",
+        "ux": "Uttara"
+    },
+    "Arjuna": {
+        "key": 2,
+        "s": "M",
+        "m": "Kunti",
+        "f": "Pandu, Indra",
+        "ux": "Subhadra, Draupadi"
+    },
+    "Bhima": {
+        "key": 3,
+        "s": "M",
+        "m": "Kunti",
+        "f": "Pandu, Varun",
+        "ux": "Hidimba, Draupadi, Baladhara"
+    },
+    "Dhritarashtra": {
+        "key": 4,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa",
+        "ux": "Gandhari"
+    },
+    "Draupadi": {
+        "key": 5,
+        "s": "F",
+        "m": NaN,
+        "f": "Drupad",
+        "vir": "Yudhishthir, Arjun, Bhim, Nakul, Sahadeva"
+    },
+    "Gandhari": {
+        "key": 6,
+        "s": "F",
+        "m": NaN,
+        "f": "Subala",
+        "vir": "Dhritarashtra"
+    },
+    "Hidimba": {
+        "key": 7,
+        "s": "F",
+        "m": NaN,
+        "f": NaN,
+        "vir": "Bhima"
+    },
+    "Hiranyakashipu": {
+        "key": 8,
+        "s": "M",
+        "m": "Diti",
+        "f": NaN,
+        "ux": NaN
+    },
+    "Karna": {
+        "key": 9,
+        "s": "M",
+        "m": "Kunti, Radha",
+        "f": "Surya, Adhiratha",
+        "ux": NaN
+    },
+    "Kunti": {
+        "key": 10,
+        "s": "F",
+        "m": NaN,
+        "f": NaN,
+        "vir": "Pandu, Surya"
+    },
+    "Nakula": {
+        "key": 11,
+        "s": "M",
+        "m": "Madri",
+        "f": "Ashwini, Pandu",
+        "ux": "Draupadi, Karenumati"
+    },
+    "Pandu": {
+        "key": 12,
+        "s": "M",
+        "m": "Ambalika",
+        "f": "Vichitravirya, Vyasa",
+        "ux": "Kunti, Madri"
+    },
+    "Sahadeva": {
+        "key": 13,
+        "s": "M",
+        "m": "Madri",
+        "f": "Ashwini, Pandu",
+        "ux": "Draupadi, Vijaya2"
+    },
+    "Yudhishthira": {
+        "key": 14,
+        "s": "M",
+        "m": "Kunti",
+        "f": "Pandu, Dharma",
+        "ux": "Draupadi, Devika"
+    },
+    "Parikshit": {
+        "key": 15,
+        "s": "M",
+        "m": "Subhadra",
+        "f": "Arjun"
+    },
+    "Shrutakirti": {
+        "key": 16,
+        "s": "M",
+        "m": "Kunti",
+        "f": "Pandu, Indra"
+    },
+    "Ghatotkacha": {
+        "key": 17,
+        "s": "M",
+        "m": "Kunti",
+        "f": "Pandu, Varun"
+    },
+    "Sutasoma": {
+        "key": 18,
+        "s": "M",
+        "m": "Kunti",
+        "f": "Pandu, Varun"
+    },
+    "Sarvaga": {
+        "key": 19,
+        "s": "M",
+        "m": "Kunti",
+        "f": "Pandu, Varun"
+    },
+    "Duryodhana": {
+        "key": 20,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Yuyutsu": {
+        "key": 21,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Duhshasana": {
+        "key": 22,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Duhsaha": {
+        "key": 23,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Jalasandha": {
+        "key": 24,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Sama": {
+        "key": 25,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Saha": {
+        "key": 26,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Vinda": {
+        "key": 27,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Anuvinda": {
+        "key": 28,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Durdharsha": {
+        "key": 29,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Subahu": {
+        "key": 30,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dushpradharshana": {
+        "key": 31,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Durmarshana": {
+        "key": 32,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Durmukha": {
+        "key": 33,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dushkarma": {
+        "key": 34,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Karna2": {
+        "key": 35,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Vivimshati": {
+        "key": 36,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Vikarna": {
+        "key": 37,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Sulochana": {
+        "key": 38,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Chitra": {
+        "key": 39,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Upachitra": {
+        "key": 40,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Chitraksha": {
+        "key": 41,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Charuchitra": {
+        "key": 42,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Sharasana": {
+        "key": 43,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Durmada": {
+        "key": 44,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dushpragaha": {
+        "key": 45,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Vivitsu": {
+        "key": 46,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Vikata": {
+        "key": 47,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Urnanabha": {
+        "key": 48,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Sunabha": {
+        "key": 49,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Nanda": {
+        "key": 50,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Upanandaka": {
+        "key": 51,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Senapati": {
+        "key": 52,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Sushena": {
+        "key": 53,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Kundodara": {
+        "key": 54,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Mahodara": {
+        "key": 55,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Chitrabana": {
+        "key": 56,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Chitravarma": {
+        "key": 57,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Suvarma": {
+        "key": 58,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Durvimochana": {
+        "key": 59,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Ayobahu": {
+        "key": 60,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Mahabahu": {
+        "key": 61,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Chitranga": {
+        "key": 62,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Chitrakundala": {
+        "key": 63,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Bhimavega": {
+        "key": 64,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Bhimabala": {
+        "key": 65,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Balaki": {
+        "key": 66,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Balavardhana": {
+        "key": 67,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Ugrayudha": {
+        "key": 68,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Bhimakarma": {
+        "key": 69,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Kanakayu": {
+        "key": 70,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dridhayudha": {
+        "key": 71,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dridhavarma": {
+        "key": 72,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dridhakshatra": {
+        "key": 73,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Somakirti": {
+        "key": 74,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Anudara": {
+        "key": 75,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dridhasandha": {
+        "key": 76,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Jarasandha": {
+        "key": 77,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Satyasandha": {
+        "key": 78,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Sadahsuvak": {
+        "key": 79,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Ugrashrava": {
+        "key": 80,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Ashvasena": {
+        "key": 81,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Senani": {
+        "key": 82,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dushparajaya": {
+        "key": 83,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Aparajita": {
+        "key": 84,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Panditaka": {
+        "key": 85,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Vishalaksha": {
+        "key": 86,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Duravara": {
+        "key": 87,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dridhahasta": {
+        "key": 88,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Suhasta": {
+        "key": 89,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Vatavega": {
+        "key": 90,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Suvarcha": {
+        "key": 91,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Adityaketu": {
+        "key": 92,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Bahvashi": {
+        "key": 93,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Nagadanta": {
+        "key": 94,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Ugrayayi": {
+        "key": 95,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Kavachi": {
+        "key": 96,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Nishangi": {
+        "key": 97,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Pashi": {
+        "key": 98,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dandadhara": {
+        "key": 99,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dhanurgraha": {
+        "key": 100,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Ugra": {
+        "key": 101,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Bhimaratha": {
+        "key": 102,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Vira": {
+        "key": 103,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Virabahu": {
+        "key": 104,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Alolupa": {
+        "key": 105,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Abhaya": {
+        "key": 106,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Roudrakarma": {
+        "key": 107,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dridharatha": {
+        "key": 108,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Anadhrishya": {
+        "key": 109,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Kundabhedi": {
+        "key": 110,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Viravi": {
+        "key": 111,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dirghalochana": {
+        "key": 112,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Dirghabahu": {
+        "key": 113,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Vyudhoru": {
+        "key": 114,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Kanakadhvaja": {
+        "key": 115,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Kundashi": {
+        "key": 116,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Viraja": {
+        "key": 117,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Jayadratha": {
+        "key": 118,
+        "s": "M",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Prativindhya": {
+        "key": 119,
+        "s": "M",
+        "m": NaN,
+        "f": "Drupad"
+    },
+    "Shatanika": {
+        "key": 120,
+        "s": "M",
+        "m": NaN,
+        "f": "Drupad"
+    },
+    "Shrutasena": {
+        "key": 121,
+        "s": "M",
+        "m": NaN,
+        "f": "Drupad"
+    },
+    "Prahlada": {
+        "key": 122,
+        "s": "M",
+        "m": "Diti",
+        "f": NaN
+    },
+    "Samhrada": {
+        "key": 123,
+        "s": "M",
+        "m": "Diti",
+        "f": NaN
+    },
+    "Anuhrada": {
+        "key": 124,
+        "s": "M",
+        "m": "Diti",
+        "f": NaN
+    },
+    "Shibi": {
+        "key": 125,
+        "s": "M",
+        "m": "Diti",
+        "f": NaN
+    },
+    "Bashkala": {
+        "key": 126,
+        "s": "M",
+        "m": "Diti",
+        "f": NaN
+    },
+    "Bhim": {
+        "key": 127,
+        "s": "M",
+        "m": NaN,
+        "f": NaN
+    },
+    "Arjun": {
+        "key": 128,
+        "s": "M",
+        "m": NaN,
+        "f": NaN
+    },
+    "Niramitra": {
+        "key": 129,
+        "s": "M",
+        "m": "Madri",
+        "f": "Ashwini, Pandu"
+    },
+    "Nakul": {
+        "key": 130,
+        "s": "M",
+        "m": "Ambalika",
+        "f": "Vichitravirya, Vyasa"
+    },
+    "Shrutakarmana": {
+        "key": 131,
+        "s": "M",
+        "m": "Madri",
+        "f": "Ashwini, Pandu"
+    },
+    "Suhotra2": {
+        "key": 132,
+        "s": "M",
+        "m": "Madri",
+        "f": "Ashwini, Pandu"
+    },
+    "Youdheya": {
+        "key": 133,
+        "s": "M",
+        "m": "Kunti",
+        "f": "Pandu, Dharma"
+    },
+    "Duhshala": {
+        "key": 134,
+        "s": "F",
+        "m": "Ambika",
+        "f": "Vichitravirya, Vyasa"
+    }
+}
