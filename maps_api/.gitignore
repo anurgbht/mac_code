@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+*.pyc
+*.pyo
+
+# Virtual Environment
+venv/
+env/
+bin/
+lib/
+include/
+pyvenv.cfg
+
+# JavaScript
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE/Editor specific files
+.idea/
+.vscode/
