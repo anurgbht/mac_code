@@ -1,0 +1,52 @@
+[
+    { "id": 100, "name": "Prabhulal dada", "gender": "male"},
+
+    { "id": 1000, "fid": 100, "pids": [1001], "name": "Premshankar bhai", "gender": "male"},
+    { "id": 1001, "pids": [1000], "name": "Pushpaben", "gender": "female"},
+
+    { "id": 1010, "mid": 1001, "fid": 1000, "pids": [1011],"name": "Dharmendra", "gender": "male"},
+    { "id": 1011, "name": "Alpaben", "pids": [1010],"gender": "female"},
+    { "id": 1012, "mid": 1011, "fid": 1010, "pids": [1013],"name": "Anurag", "gender": "male"},
+    { "id": 1013, "name": "Aditi", "pids": [1012],"gender": "female"},
+    { "id": 1014, "mid": 1011, "fid": 1010,"name": "Bhaumik", "gender": "male"},
+
+    { "id": 1020, "mid": 1001, "fid": 1000, "pids": [1021],"name": "Mukesh", "gender": "male"},
+    { "id": 1021, "name": "Kiranben", "pids": [1020],"gender": "female"},
+    { "id": 1022, "mid": 1021, "fid": 1020,"name": "Shivam", "gender": "male"},
+    { "id": 1023, "mid": 1021, "fid": 1020,"name": "Stuti", "gender": "female"},
+
+    { "id": 1030, "mid": 1001, "fid": 1000, "pids": [1031],"name": "Daxaben", "gender": "female"},
+    { "id": 1031, "name": "Deepak Kumar", "pids": [1030],"gender": "male"},
+    { "id": 1032, "mid": 1030, "fid": 1031,"name": "Dhruv", "gender": "male"},
+    { "id": 1033, "mid": 1030, "fid": 1031,"name": "Palak", "gender": "female"},
+
+    { "id": 2000, "fid": 100, "pids": [2001], "name": "Praveen bhai", "gender": "male"},
+    { "id": 2001, "pids": [2000], "name": "Kundanben", "gender": "female"},
+
+    { "id": 2010, "mid": 2001, "fid": 2000, "pids": [2011],"name": "Ramesh", "gender": "male"},
+    { "id": 2011, "name": "Ritaben", "pids": [2010],"gender": "female"},
+    { "id": 2012, "mid": 2011, "fid": 2010, "pids": [2013],"name": "Dushyant", "gender": "male"},
+    { "id": 2013, "name": "Mumukshi", "pids": [2012],"gender": "female"},
+    { "id": 2014, "mid": 2011, "fid": 2010,"name": "Meet", "gender": "male"},
+
+    { "id": 2040, "mid": 2001, "fid": 2000, "pids": [2041],"name": "Hitesh", "gender": "male"},
+    { "id": 2041, "name": "Alkaben", "pids": [2040],"gender": "female"},
+    { "id": 2042, "mid": 2041, "fid": 2040, "name": "Shubham", "gender": "male"},
+    { "id": 2044, "mid": 2041, "fid": 2040,"name": "Disha", "gender": "female"},
+
+    { "id": 2030, "mid": 2001, "fid": 2000, "pids": [2031],"name": "Mahesh", "gender": "male"},
+    { "id": 2031, "name": "Umaben", "pids": [2030],"gender": "female"},
+    { "id": 2032, "mid": 2031, "fid": 2030, "name": "Megha", "gender": "female"},
+
+    { "id": 2020, "mid": 2001, "fid": 2000, "pids": [2021],"name": "Dharmesh", "gender": "male"},
+    { "id": 2021, "name": "Neeluben", "pids": [2020],"gender": "female"},
+    { "id": 2022, "mid": 2021, "fid": 2020, "name": "Krunal", "gender": "male"},
+    { "id": 2024, "mid": 2021, "fid": 2020,"name": "Bhavya", "gender": "female"},
+
+    { "id": 2050, "mid": 2001, "fid": 2000, "pids": [2051],"name": "Geetaben", "gender": "female"},
+    { "id": 2051, "name": "Vinod kumar", "pids": [2050],"gender": "male"},
+    { "id": 2052, "mid": 2050, "fid": 2051, "pids": [2053],"name": "Chintan", "gender": "male"},
+    { "id": 2053, "pids":[2052], "name": "Dhanu ben", "gender": "female"},
+    { "id": 2054, "mid": 2050, "fid": 2051,"name": "Riddhi", "gender": "female"}
+    
+]
