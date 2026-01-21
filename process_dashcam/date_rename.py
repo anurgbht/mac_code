@@ -1,10 +1,10 @@
 # Running instructions:
 
 # Dry-run: lists proposed renames but doesn't change files
-# python process_dashcam/date_rename.py --path /Volumes/Bhatt\\ T7/Videos/Dashcam/Concatenated --ext mp4
+# uv run python ./process_dashcam/date_rename.py --path "/Users/anuragbhatt/Movies/Dashcam/Concatenated" --ext mp4
 
 # Apply the renames (will skip targets that already exist)
-# python process_dashcam/date_rename.py --path /Volumes/Bhatt\\ T7/Videos/Dashcam/Concatenated --ext mp4 --apply
+# uv run python ./process_dashcam/date_rename.py --path "/Users/anuragbhatt/Movies/Dashcam/Concatenated" --ext mp4 --apply
 
 import re
 import argparse

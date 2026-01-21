@@ -27,3 +27,16 @@ for fpath in SRC_DIR.glob("*"):
         new_name += sep
         new_name += end_with
     os.rename(fpath, Path(SRC_DIR, new_name))
+
+
+## rename PDF files in a directory
+
+PDF_DIR = Path(r'/Users/anuragbhatt/Documents/.AHA/Savita Bhabhi')
+
+
+# vdoc.pub_savita-bhabhi-ep-01-bra-salesman-hindi.pdf
+for fpath in PDF_DIR.glob("*.pdf"):
+    new_name = fpath.stem.replace("vdoc.pub_", "").replace("savita-bhabhi-", "Savita Bhabhi - ").replace("ep-", "Episode ").replace("hindi", "Hindi").replace("-", " ").replace("   ", " - ") + fpath.suffix
+    new_name = ' '.join(word.capitalize() for word in new_name.split())
+    print(new_name)
+    os.rename(fpath, Path(PDF_DIR, new_name))
