@@ -142,3 +142,7 @@ Downloaded/
 downloads/
 cache/
 .cache/
+
+
+## user-specific
+*.json
