@@ -26,12 +26,20 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 HERE = Path(__file__).resolve().parent
 PORTFOLIO = HERE / "processed" / "portfolio.json"
+TRANSACTIONS = HERE / "processed" / "transactions.csv"
 IST = ZoneInfo("Asia/Kolkata")
 
 # Palette (validated dataviz defaults). Gain/loss always also carries a +/- sign.
 GAIN, LOSS, NEUTRAL = "#0ca30c", "#d03b3b", "#898781"
 SERIES = "#2a78d6"
 COST_LINE = "#eb6834"
+# Event markers (categorical slots, fixed per event type)
+EVENT_STYLE = {
+    "BUY": dict(color="#6250d6", symbol="triangle-up", size=13, label="Buy"),
+    "SELL": dict(color="#e87ba4", symbol="triangle-down", size=13, label="Sell"),
+    "DIVIDEND": dict(color="#1baf7a", symbol="circle", size=8, label="Dividend"),
+    "SHARE_ADJUSTMENT": dict(color="#eda100", symbol="diamond", size=10, label="Split / bonus"),
+}
 
 st.set_page_config(page_title="Portfolio Monitor", page_icon="📈", layout="wide")
 
@@ -82,9 +90,15 @@ def fetch_quotes(tickers: tuple[str, ...]) -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
-def fetch_history(ticker: str, period: str) -> pd.Series:
-    h = yf.download(ticker, period=period, interval="1d", progress=False, auto_adjust=False)
+def fetch_history(ticker: str, period: str | None = None, start: str | None = None) -> pd.Series:
+    when = {"start": start} if start else {"period": period}
+    h = yf.download(ticker, interval="1d", progress=False, auto_adjust=False, **when)
     return _by_ticker(h, [ticker], "Close")[ticker].dropna()
+
+
+@st.cache_data(show_spinner=False)
+def load_transactions(path: str, mtime: float) -> pd.DataFrame:
+    return pd.read_csv(path, parse_dates=["date"])
 
 
 def market_status(now: datetime) -> tuple[bool, str]:
@@ -123,19 +137,24 @@ def polarity_color(v):
 
 def diverging_bar(df: pd.DataFrame, value: str, label_fmt, title: str) -> go.Figure:
     d = df.sort_values(value)
-    lo, hi = min(d[value].min(), 0), max(d[value].max(), 0)
-    pad = (hi - lo) * 0.3 or 1  # room for the outside labels on both sides
+    labels = [label_fmt(v) for v in d[value]]
     fig = go.Figure(go.Bar(
         x=d[value], y=d["Stock"], orientation="h",
         marker=dict(color=[GAIN if v >= 0 else LOSS for v in d[value]], cornerradius=4),
-        text=[label_fmt(v) for v in d[value]], textposition="outside", cliponaxis=False,
-        hovertemplate="%{y}: %{text}<extra></extra>",
+        text=labels, textposition="none", hovertemplate="%{y}: %{text}<extra></extra>",
     ))
+    # Value label sits on the far side of the zero line from its bar, so it never
+    # collides with the bar or with the stock name, however narrow the chart gets.
+    for stock, v, lab in zip(d["Stock"], d[value], labels):
+        fig.add_annotation(x=0, y=stock, text=lab, showarrow=False, font=dict(size=11),
+                           xanchor="right" if v >= 0 else "left", xshift=-4 if v >= 0 else 4)
+    lo, hi = min(d[value].min(), 0), max(d[value].max(), 0)
+    pad = (hi - lo) * 0.35 or 1  # room for the labels on the empty side of zero
     fig.update_layout(
         title=dict(text=title, font=dict(size=14)), height=60 + 44 * len(d),
-        margin=dict(l=10, r=60, t=40, b=10), bargap=0.35, showlegend=False,
+        margin=dict(l=10, r=10, t=40, b=10), bargap=0.35, showlegend=False,
         xaxis=dict(zeroline=True, zerolinecolor="#c3c2b7", showgrid=False, showticklabels=False,
-                   range=[lo - (pad if lo < 0 else 0), hi + (pad if hi > 0 else 0)]),
+                   range=[min(lo, -pad), max(hi, pad)]),
         yaxis=dict(showgrid=False, ticksuffix="  "),
     )
     return fig
@@ -258,25 +277,88 @@ live()
 
 # ----------------------------------------------------------------------------- stock detail
 st.subheader("Stock detail")
-d1, d2 = st.columns([3, 1])
+d1, d2 = st.columns([2, 2])
 sym = d1.selectbox("Stock", holdings.symbol.tolist(), label_visibility="collapsed")
-period = d2.segmented_control("Range", ["1mo", "6mo", "1y", "2y", "5y"], default="1y",
-                              label_visibility="collapsed") or "1y"
+RANGES = ["Since 1st buy", "1mo", "6mo", "1y", "2y", "5y"]
+period = d2.segmented_control("Range", RANGES, default=RANGES[0], label_visibility="collapsed") or RANGES[0]
 h = holdings.set_index("symbol").loc[sym]
-hist = fetch_history(h.ticker, period)
+if period == RANGES[0]:
+    hist = fetch_history(h.ticker, start=(pd.Timestamp(h.first_buy) - pd.Timedelta(days=30)).date().isoformat())
+else:
+    hist = fetch_history(h.ticker, period=period)
+
+tx = load_transactions(str(TRANSACTIONS), TRANSACTIONS.stat().st_mtime) if TRANSACTIONS.exists() else pd.DataFrame()
+ev = tx[tx.symbol == sym].copy() if not tx.empty else pd.DataFrame(columns=["date", "kind"])
+hist.index = pd.to_datetime(hist.index).tz_localize(None)
+ev = ev[(ev.date >= hist.index[0]) & (ev.date <= hist.index[-1])] if not hist.empty else ev.iloc[0:0]
+
+# Yahoo prices are split-adjusted, so scale the per-share price of each past trade by
+# every split/bonus that happened after it, to place it on the same scale as the chart.
+adjustments = tx[(tx.symbol == sym) & (tx.kind == "SHARE_ADJUSTMENT")] if not tx.empty else pd.DataFrame()
+
+
+def later_factor(d: pd.Timestamp) -> float:
+    return float(adjustments.loc[adjustments.date > d, "share_factor"].prod()) if len(adjustments) else 1.0
+
+
+def short_remark(r: str) -> str:
+    import re
+    return re.sub(r"\s*(applied )?on Ex-Date:\s*\S+", "", str(r)).strip()
+
+
+def event_hover(kind: str, g: pd.DataFrame) -> str:
+    d = g.date.iloc[0]
+    if kind in ("BUY", "SELL"):
+        qty = g.qty.sum()
+        px = (g.qty * g.price).sum() / qty
+        verb = "Bought" if kind == "BUY" else "Sold"
+        f = later_factor(d)
+        adj = f"<br>= ₹{px / f:,.2f} split-adjusted ({qty * f:g} shares today)" if f != 1 else ""
+        return f"<b>{verb} {qty:g} @ ₹{px:,.2f}</b>{adj}"
+    if kind == "DIVIDEND":
+        return (f"<b>Dividend ₹{g.dividend_per_share.sum():g}/share</b>"
+                f"<br>₹{g.value.sum():,.0f} received on {g.qty.iloc[0]:g} shares")
+    return f"<b>{' + '.join(short_remark(r) for r in g.remarks)}</b><br>×{g.share_factor.prod():g} shares"
+
 
 fig = go.Figure()
-fig.add_trace(go.Scatter(x=hist.index, y=hist.values, mode="lines", name=sym,
-                         line=dict(color=SERIES, width=2),
-                         hovertemplate="%{x|%d %b %Y}<br>₹%{y:,.2f}<extra></extra>"))
+fig.add_trace(go.Scatter(x=hist.index, y=hist.values, mode="lines", name=sym, showlegend=False,
+                         line=dict(color=SERIES, width=2), hovertemplate="₹%{y:,.2f}<extra></extra>"))
 fig.add_hline(y=h.avg_cost, line=dict(color=COST_LINE, width=2, dash="dash"),
               annotation_text=f"Your avg cost ₹{h.avg_cost:,.2f}", annotation_position="top left")
-fig.update_layout(height=380, margin=dict(l=10, r=10, t=10, b=10), hovermode="x unified",
-                  showlegend=False, yaxis=dict(tickprefix="₹", gridcolor="rgba(137,135,129,0.2)"),
-                  xaxis=dict(showgrid=False))
+
+span_days = max((hist.index[-1] - hist.index[0]).days, 1) if not hist.empty else 1
+for kind, style in EVENT_STYLE.items():
+    rows = ev[ev.kind == kind]
+    if rows.empty:
+        continue
+    groups = [g for _, g in rows.groupby("date")]
+    dates = [g.date.iloc[0] for g in groups]
+    prices = [float(hist.asof(d)) for d in dates]
+    fig.add_trace(go.Scatter(
+        x=dates, y=prices, mode="markers", name=style["label"],
+        marker=dict(color=style["color"], symbol=style["symbol"], size=style["size"],
+                    line=dict(color="rgba(0,0,0,0.6)", width=1)),
+        text=[event_hover(kind, g) for g in groups], hovertemplate="%{text}<extra></extra>",
+    ))
+    if kind in ("BUY", "SELL"):  # trades: always-visible vertical marker + label
+        last_label = None
+        for d in dates:
+            fig.add_vline(x=d, line=dict(color=style["color"], width=1.5, dash="dot"), opacity=0.8)
+            # skip the text label when it would collide with the previous one
+            if last_label is None or (d - last_label).days > span_days * 0.05:
+                fig.add_annotation(x=d, y=1, yref="paper", text=style["label"], showarrow=False,
+                                   yanchor="bottom", font=dict(color=style["color"], size=11))
+                last_label = d
+
+fig.update_layout(height=420, margin=dict(l=10, r=10, t=30, b=10), hovermode="x unified",
+                  legend=dict(orientation="h", yanchor="top", y=-0.08, x=0),
+                  yaxis=dict(tickprefix="₹", gridcolor="rgba(137,135,129,0.2)"),
+                  xaxis=dict(showgrid=False, hoverformat="%d %b %Y"))
 st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
-st.caption("Prices are adjusted by Yahoo for splits and bonuses, and so is your average cost, "
-           "so the two lines are comparable.")
+st.caption("Purchases are dotted lines. Hover the dots for dividends and splits. Click a legend item to hide it. "
+           "Yahoo adjusts prices for splits and bonuses, and your average cost is adjusted the same way, "
+           "so the lines are comparable.")
 
 lots = next(x for x in portfolio["holdings"] if x["symbol"] == sym)["lots"]
 with st.expander(f"Open lots for {sym} (FIFO, cost includes charges)"):
