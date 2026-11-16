@@ -1,0 +1,12 @@
+[project]
+name = "stocks-analysis"
+version = "0.1.0"
+description = "Ingest broker transaction exports and monitor the portfolio live"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2",
+    "openpyxl>=3.1",
+    "yfinance>=0.2.50",
+    "streamlit>=1.40",
+    "plotly>=5.24",
+]
