@@ -151,6 +151,17 @@ class Position:
     first_buy: str | None = None
     last_txn: str | None = None
     warnings: list[str] = field(default_factory=list)
+    # Position after each day's events: {date, qty, invested, avg_cost}
+    cost_history: list[dict] = field(default_factory=list)
+
+    def snapshot(self, date: str) -> None:
+        qty = self.qty
+        point = {"date": date, "qty": round(qty, 6), "invested": round(self.invested, 2),
+                 "avg_cost": round(self.invested / qty, 4) if qty > 1e-9 else None}
+        if self.cost_history and self.cost_history[-1]["date"] == date:
+            self.cost_history[-1] = point  # keep only the end-of-day state
+        else:
+            self.cost_history.append(point)
 
     @property
     def qty(self) -> float:
@@ -291,15 +302,20 @@ def ingest(data_dir: Path, out_dir: Path) -> dict:
         pos = positions.setdefault(ev["symbol"], Position(ev["symbol"]))
         if ev["kind"] != "DEMERGER":
             pos.apply(ev)
+            if ev["kind"] in ("BUY", "SELL", "SHARE_ADJUSTMENT"):
+                pos.snapshot(ev["date"])
             continue
         parent = find_demerger_parent(ev, positions)
         if parent is None:
             pos.warnings.append(f"{ev['date']}: couldn't find the parent of this demerger "
                                 f"({ev['remarks']!r}); add it to DEMERGER_PARENT_OVERRIDES")
             pos.receive_demerger(ev, "unknown parent")
+            pos.snapshot(ev["date"])
             continue
         positions[parent].give_up_cost(ev["value"], ev["date"], ev["symbol"])
         pos.receive_demerger(ev, parent)
+        positions[parent].snapshot(ev["date"])
+        pos.snapshot(ev["date"])
         demerger_parents[(ev["symbol"], ev["date"])] = parent
     tx["related_symbol"] = [
         demerger_parents.get((s, d), r) for s, d, r in zip(tx.symbol, tx.date, tx.related_symbol)]
@@ -311,6 +327,7 @@ def ingest(data_dir: Path, out_dir: Path) -> dict:
         "holdings": [
             {**p.summary(),
              "lots": [{**l, "qty": round(l["qty"], 6), "cost": round(l["cost"], 2)} for l in p.lots],
+             "cost_history": p.cost_history,
              "warnings": p.warnings}
             for p in positions.values()
         ],
