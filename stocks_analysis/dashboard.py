@@ -39,9 +39,12 @@ EVENT_STYLE = {
     "SELL": dict(color="#e87ba4", symbol="triangle-down", size=13, label="Sell"),
     "DIVIDEND": dict(color="#1baf7a", symbol="circle", size=8, label="Dividend"),
     "SHARE_ADJUSTMENT": dict(color="#eda100", symbol="diamond", size=10, label="Split / bonus"),
+    "DEMERGER_IN": dict(color="#eda100", symbol="star", size=12, label="Demerger"),
+    "DEMERGER_OUT": dict(color="#eda100", symbol="star", size=12, label="Demerger"),
 }
 
-st.set_page_config(page_title="Portfolio Monitor", page_icon="📈", layout="wide")
+st.set_page_config(page_title="Portfolio Monitor", page_icon="📈", layout="wide",
+                   initial_sidebar_state="collapsed")
 
 
 # ----------------------------------------------------------------------------- data
@@ -202,11 +205,17 @@ def live() -> None:
         return
 
     df = holdings.join(quotes, on="ticker")
-    missing = df[df["ltp"].isna()].symbol.tolist()
-    if missing:
-        st.warning(f"No price data for: {', '.join(missing)} — check the symbol in the filename.")
     df["ltp"] = df["ltp"].astype(float)
     df["prev_close"] = df["prev_close"].astype(float)
+    no_price = df["ltp"].isna()
+    if no_price.any():
+        # Unlisted holdings / bad symbols: value at cost and keep them out of today's move,
+        # so they don't distort the portfolio totals.
+        df.loc[no_price, "ltp"] = df.loc[no_price, "avg_cost"]
+        df.loc[no_price, "prev_close"] = df.loc[no_price, "avg_cost"]
+        st.info(f"No market price for {', '.join(df[no_price].symbol)} (unlisted, or check the "
+                "symbol in the filename). Valued at cost and marked with * below.")
+        df.loc[no_price, "symbol"] = df.loc[no_price, "symbol"] + " *"
     df["value"] = df.qty * df.ltp
     df["day_chg_pct"] = (df.ltp / df.prev_close - 1) * 100
     df["day_pnl"] = df.qty * (df.ltp - df.prev_close)
@@ -259,7 +268,7 @@ def live() -> None:
                        "Day P&L": lambda v: inr(v, True), "P&L": lambda v: inr(v, True),
                        "Invested": inr, "Value": inr, "Dividends": inr}))
     st.dataframe(
-        styled, hide_index=True, width="stretch",
+        styled, hide_index=True, width="stretch", height=35 * (len(table) + 1) + 3,  # no inner scroll
         column_config={"Today": st.column_config.LineChartColumn("Today", width="small")},
     )
 
@@ -288,9 +297,18 @@ else:
     hist = fetch_history(h.ticker, period=period)
 
 tx = load_transactions(str(TRANSACTIONS), TRANSACTIONS.stat().st_mtime) if TRANSACTIONS.exists() else pd.DataFrame()
-ev = tx[tx.symbol == sym].copy() if not tx.empty else pd.DataFrame(columns=["date", "kind"])
+if tx.empty:
+    ev = pd.DataFrame(columns=["date", "kind"])
+else:
+    if "related_symbol" not in tx:
+        tx["related_symbol"] = ""
+    ev = tx[tx.symbol == sym].copy()
+    ev.loc[ev.kind == "DEMERGER", "kind"] = "DEMERGER_IN"  # shares received from a parent
+    spun_off = tx[(tx.kind == "DEMERGER") & (tx.related_symbol == sym)].assign(kind="DEMERGER_OUT")
+    ev = pd.concat([ev, spun_off], ignore_index=True)
 hist.index = pd.to_datetime(hist.index).tz_localize(None)
-ev = ev[(ev.date >= hist.index[0]) & (ev.date <= hist.index[-1])] if not hist.empty else ev.iloc[0:0]
+ev = (ev[(ev.date >= hist.index[0] - pd.Timedelta(days=60)) & (ev.date <= hist.index[-1])]
+      if not hist.empty else ev.iloc[0:0])
 
 # Yahoo prices are split-adjusted, so scale the per-share price of each past trade by
 # every split/bonus that happened after it, to place it on the same scale as the chart.
@@ -318,6 +336,14 @@ def event_hover(kind: str, g: pd.DataFrame) -> str:
     if kind == "DIVIDEND":
         return (f"<b>Dividend ₹{g.dividend_per_share.sum():g}/share</b>"
                 f"<br>₹{g.value.sum():,.0f} received on {g.qty.iloc[0]:g} shares")
+    if kind == "DEMERGER_IN":
+        r = g.iloc[0]
+        return (f"<b>Received {r.qty:g} shares via demerger from {r.related_symbol}</b>"
+                f"<br>Cost carried over ₹{r.value:,.2f} (₹{r.price:,.2f}/share)")
+    if kind == "DEMERGER_OUT":
+        r = g.iloc[0]
+        return (f"<b>Demerged {r.symbol}: received {r.qty:g} shares</b>"
+                f"<br>₹{r.value:,.2f} of your cost moved to {r.symbol}")
     return f"<b>{' + '.join(short_remark(r) for r in g.remarks)}</b><br>×{g.share_factor.prod():g} shares"
 
 
@@ -334,7 +360,9 @@ for kind, style in EVENT_STYLE.items():
         continue
     groups = [g for _, g in rows.groupby("date")]
     dates = [g.date.iloc[0] for g in groups]
-    prices = [float(hist.asof(d)) for d in dates]
+    # A demerged stock may list weeks after the ex-date: pin those markers to its first price.
+    prices = [float(hist.asof(d)) if d >= hist.index[0] else float(hist.iloc[0]) for d in dates]
+    prices = [float(hist.iloc[0]) if pd.isna(p) else p for p in prices]
     fig.add_trace(go.Scatter(
         x=dates, y=prices, mode="markers", name=style["label"],
         marker=dict(color=style["color"], symbol=style["symbol"], size=style["size"],
